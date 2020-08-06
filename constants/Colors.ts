@@ -1,19 +1,13 @@
-const tintColorLight = '#2f95dc';
-const tintColorDark = '#fff';
+import { Colors } from "../types";
 
-export default {
-  light: {
-    text: '#000',
-    background: '#fff',
-    tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#fff',
-    background: '#000',
-    tint: tintColorDark,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
-  },
+export const dark: Colors = {
+  background: "#212121",
+  deep: "#121212",
+  text: "#ffffff",
+};
+
+export const light: Colors = {
+  background: "#ffffff",
+  deep: "#f8f8f8",
+  text: "#212121",
 };

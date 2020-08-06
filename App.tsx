@@ -1,20 +1,14 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import {} from "react-native";
+import MainNavigator from "./navigation/Navigator";
+import Provider from "./context/Context";
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>asdf</Text>
-    </View>
+    <Provider>
+      <MainNavigator />
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default App;
