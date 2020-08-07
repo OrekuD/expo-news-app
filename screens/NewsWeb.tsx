@@ -5,9 +5,18 @@ import { StackScreenProps } from "@react-navigation/stack";
 
 const NewsWeb: React.FC<StackScreenProps<{}>> = ({ navigation, route }) => {
   const { url } = route.params;
+
+  const runFirst = `
+      window.isNativeApp = true;
+      true; // note: this is required, or you'll sometimes get silent failures
+    `;
+
   return (
     <View style={styles.container}>
-      <WebView source={{ uri: url }} />
+      <WebView
+        source={{ uri: url }}
+        injectedJavaScriptBeforeContentLoaded={runFirst}
+      />
     </View>
   );
 };
