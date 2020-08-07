@@ -9,7 +9,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 import { useAppContext } from "../context/Context";
-import { Text, Card, Header } from "../components";
+import { Text, Card, Header, Categories } from "../components";
 import { key } from "../apikey";
 import { NewsObj, TabParamList, HomeStackParamList } from "../types";
 import { CompositeNavigationProp } from "@react-navigation/native";
@@ -42,13 +42,12 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
     }
   };
 
-  return (
-    <View style={{ ...styles.container, backgroundColor: colors.background }}>
-      <Header navigation={navigation} />
+  const NewsArticles = () => {
+    return (
       <FlatList
         data={news}
-        keyExtractor={() => Math.random().toString()}
         renderItem={({ item }) => <Card item={item} navigation={navigation} />}
+        keyExtractor={({ title }) => title}
         ListEmptyComponent={() => (
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -56,6 +55,18 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
             <ActivityIndicator size="large" color={colors.text} />
           </View>
         )}
+      />
+    );
+  };
+
+  return (
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
+      <FlatList
+        keyExtractor={() => Math.random().toString()}
+        data={[""]}
+        ListHeaderComponent={() => <Header navigation={navigation} />}
+        renderItem={({ item }) => <Categories />}
+        ListFooterComponent={() => <NewsArticles />}
       />
     </View>
   );
