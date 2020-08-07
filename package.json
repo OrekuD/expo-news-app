@@ -33,7 +33,8 @@
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
     "react-native-web": "~0.11.7",
-    "expo-linear-gradient": "~8.2.1"
+    "expo-linear-gradient": "~8.2.1",
+    "react-native-webview": "9.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

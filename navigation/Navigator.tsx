@@ -12,7 +12,7 @@ import {
   Feather,
   FontAwesome5,
 } from "@expo/vector-icons";
-import { HomeScreen, NewsScreen, SettingsScreen } from "../screens";
+import { HomeScreen, NewsScreen, SettingsScreen, NewsWeb } from "../screens";
 import { StatusBar } from "react-native";
 import { useAppContext } from "../context/Context";
 
@@ -29,6 +29,13 @@ const HomeStackNavigator = () => {
     >
       <HomeStack.Screen name="Home" component={HomeScreen} />
       <HomeStack.Screen name="News" component={NewsScreen} />
+      <HomeStack.Screen
+        name="NewsWeb"
+        component={NewsWeb}
+        options={{
+          ...TransitionPresets.ModalPresentationIOS,
+        }}
+      />
     </HomeStack.Navigator>
   );
 };

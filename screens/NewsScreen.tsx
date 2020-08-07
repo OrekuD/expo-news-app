@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -13,11 +13,14 @@ import { height } from "../constants/Layout";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { StackScreenProps } from "@react-navigation/stack";
+import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
 
 const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
   const { colors, toggleTabbar } = useAppContext();
+  const [result, setResult] = useState<any>(null);
   const { item } = route.params;
-  const { urlToImage, publishedAt, content, description, source, title } = item;
+  const { urlToImage, publishedAt, description, source, title, url } = item;
 
   useEffect(() => {
     toggleTabbar(false);
@@ -26,6 +29,14 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
       toggleTabbar(true);
     };
   }, []);
+
+  const openLink = async () => {
+    // let result = await WebBrowser.openBrowserAsync(url);
+    // setResult(result);
+    // console.log(result);
+
+    Linking.openURL(url);
+  };
 
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
@@ -60,7 +71,7 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
               size={32}
             />
           </BorderlessButton>
-          <BorderlessButton>
+          <BorderlessButton onPress={openLink}>
             <Feather name="arrow-up-right" color={colors.text} size={40} />
           </BorderlessButton>
         </View>
