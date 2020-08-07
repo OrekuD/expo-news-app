@@ -71,7 +71,9 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
               size={32}
             />
           </BorderlessButton>
-          <BorderlessButton onPress={openLink}>
+          <BorderlessButton
+            onPress={() => navigation.navigate("NewsWeb", { url })}
+          >
             <Feather name="arrow-up-right" color={colors.text} size={40} />
           </BorderlessButton>
         </View>
