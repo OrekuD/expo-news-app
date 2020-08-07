@@ -9,6 +9,8 @@ interface ProviderProps {
 const Context = createContext<AppContext>({
   darkTheme: false,
   toggleTheme: () => {},
+  toggleLinks: () => {},
+  linksInExternalBrowser: false,
   colors: light,
   showTabBar: true,
   toggleTabbar: () => {},
@@ -18,12 +20,19 @@ const Context = createContext<AppContext>({
 
 const Provider = ({ children }: ProviderProps) => {
   const [darkTheme, setTheme] = useState<boolean>(true);
+  const [linksInExternalBrowser, setLinksInExternalBrowser] = useState<boolean>(
+    false
+  );
   const [showTabBar, setShowTabBar] = useState<boolean>(true);
   const [colors, setColors] = useState<Colors>(light);
   const [activeNews, setNews] = useState<NewsObj | null>(null);
 
   const toggleTheme = () => {
     setTheme(!darkTheme);
+  };
+
+  const toggleLinks = () => {
+    setLinksInExternalBrowser(!linksInExternalBrowser);
   };
 
   const setActiveNews = (news: NewsObj) => {
@@ -50,6 +59,8 @@ const Provider = ({ children }: ProviderProps) => {
     showTabBar,
     activeNews,
     setActiveNews,
+    toggleLinks,
+    linksInExternalBrowser,
   };
   return <Context.Provider value={state}>{children}</Context.Provider>;
 };

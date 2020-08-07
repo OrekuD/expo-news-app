@@ -1,6 +1,8 @@
 export interface AppContext {
   darkTheme: boolean;
   toggleTheme: () => void;
+  linksInExternalBrowser: boolean;
+  toggleLinks: () => void;
   colors: Colors;
   toggleTabbar: (state: boolean) => void;
   showTabBar: boolean;

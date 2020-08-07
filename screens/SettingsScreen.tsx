@@ -1,19 +1,28 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Switch } from "react-native";
+import { View, StyleSheet, Switch } from "react-native";
 import { useAppContext } from "../context/Context";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { width } from "../constants/Layout";
+import { Text } from "../components";
 
 const SettingsScreen = ({ navigation }: BottomTabScreenProps<{}>) => {
-  const { colors, toggleTheme, darkTheme } = useAppContext();
+  const {
+    colors,
+    toggleTheme,
+    darkTheme,
+    linksInExternalBrowser,
+    toggleLinks,
+  } = useAppContext();
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <View style={styles.content}>
         <View style={{ ...styles.card, backgroundColor: colors.deep }}>
-          <Text style={{ ...styles.cardText, color: colors.text }}>
-            Dark theme
-          </Text>
+          <Text text="Dark theme" style={styles.cardText} />
           <Switch value={darkTheme} onValueChange={toggleTheme} />
+        </View>
+        <View style={{ ...styles.card, backgroundColor: colors.deep }}>
+          <Text text="Open links in an external browser" />
+          <Switch value={linksInExternalBrowser} onValueChange={toggleLinks} />
         </View>
       </View>
     </View>
@@ -41,8 +50,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  cardText: {
-    fontSize: 18,
+    marginBottom: 10,
   },
 });

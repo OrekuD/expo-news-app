@@ -16,7 +16,12 @@ import { StackScreenProps } from "@react-navigation/stack";
 import * as WebBrowser from "expo-web-browser";
 
 const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
-  const { colors, toggleTabbar, activeNews } = useAppContext();
+  const {
+    colors,
+    toggleTabbar,
+    activeNews,
+    linksInExternalBrowser,
+  } = useAppContext();
   const [result, setResult] = useState<any>(null);
   const {
     urlToImage,
@@ -75,7 +80,11 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
             />
           </BorderlessButton>
           <BorderlessButton
-            onPress={() => navigation.navigate("NewsWeb", { url })}
+            onPress={() => {
+              linksInExternalBrowser
+                ? openLink()
+                : navigation.navigate("NewsWeb", { url });
+            }}
           >
             <Feather name="arrow-up-right" color={colors.text} size={40} />
           </BorderlessButton>
