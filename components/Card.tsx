@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { useAppContext } from "../context/Context";
 import Text from "./Text";
 import { RectButton } from "react-native-gesture-handler";
@@ -12,12 +12,20 @@ interface Props {
 
 const Card = ({ navigation, item }: Props) => {
   const { colors } = useAppContext();
+  const { urlToImage, title, description } = item;
   return (
     <RectButton
       onPress={() => navigation.navigate("News", { item })}
-      style={{ ...styles.container }}
+      style={{ ...styles.container, backgroundColor: colors.deep }}
     >
-      <Text text="Card" />
+      <Image
+        source={{ uri: urlToImage }}
+        style={styles.image}
+        resizeMode="cover"
+      />
+      <View style={styles.content}>
+        <Text text={title} />
+      </View>
     </RectButton>
   );
 };
@@ -25,10 +33,22 @@ const Card = ({ navigation, item }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 150,
-    backgroundColor: "red",
+    height: 120,
     marginBottom: 10,
     borderRadius: 5,
+    flexDirection: "row",
+    overflow: "hidden",
+  },
+  image: {
+    width: "45%",
+    height: "100%",
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+  },
+  content: {
+    width: "55%",
+    height: "100%",
+    padding: 5,
   },
 });
 

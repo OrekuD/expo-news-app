@@ -50,7 +50,7 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
       <View style={styles.footer}>
         <View style={styles.row}>
           <View style={styles.icon} />
-          <Text text={source.name.split(" ")[0]} />
+          <Text text={source.name} />
         </View>
         <View style={styles.row}>
           <BorderlessButton style={{ marginRight: 20 }}>
