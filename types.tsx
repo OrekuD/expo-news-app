@@ -11,3 +11,17 @@ export interface Colors {
   text: string;
   deep?: string;
 }
+
+export interface NewsObj {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: {
+    id: string;
+    name: string;
+  };
+  title: string;
+  url: string;
+  urlToImage: string;
+}

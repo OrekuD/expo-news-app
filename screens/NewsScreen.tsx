@@ -1,14 +1,23 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Platform, StatusBar } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  ScrollView,
+  Image,
+} from "react-native";
 import { useAppContext } from "../context/Context";
 import { Text } from "../components";
 import { height } from "../constants/Layout";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { StackScreenProps } from "@react-navigation/stack";
 
-const NewsScreen = ({ navigation }: StackScreenProps<{}>) => {
+const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
   const { colors, toggleTabbar } = useAppContext();
+  const { item } = route.params;
+  const { urlToImage, publishedAt, content, description, source, title } = item;
 
   useEffect(() => {
     toggleTabbar(false);
@@ -23,37 +32,36 @@ const NewsScreen = ({ navigation }: StackScreenProps<{}>) => {
       <RectButton onPress={navigation.goBack} style={styles.backIcon}>
         <MaterialCommunityIcons name="chevron-left" color="#121212" size={30} />
       </RectButton>
-      <View style={styles.imageContainer}></View>
-      <View style={styles.content}>
-        <Text text={new Date().toDateString()} style={styles.dateText} />
-        <Text
-          text="Deserunt duis incididunt eiusmod laborum pariatur reprehenderit voluptate enim laboris."
-          style={styles.title}
+      <ScrollView style={{ flex: 1 }}>
+        <Image
+          source={{ uri: urlToImage }}
+          style={styles.imageContainer}
+          resizeMode="cover"
         />
-        <Text
-          text="Deserunt duis incididunt eiusmod laborum pariatur reprehenderit voluptate enim laboris."
-          style={{ fontSize: 16 }}
-        />
-      </View>
+        <View style={styles.content}>
+          <Text
+            text={new Date(publishedAt).toDateString()}
+            style={styles.dateText}
+          />
+          <Text text={title} style={styles.title} />
+          <Text text={description} style={{ fontSize: 18 }} />
+        </View>
+      </ScrollView>
       <View style={styles.footer}>
         <View style={styles.row}>
           <View style={styles.icon} />
-          <Text text="CNN" />
+          <Text text={source.name.split(" ")[0]} />
         </View>
         <View style={styles.row}>
           <BorderlessButton style={{ marginRight: 20 }}>
             <MaterialCommunityIcons
               name="bookmark-outline"
               color={colors.text}
-              size={34}
+              size={32}
             />
           </BorderlessButton>
           <BorderlessButton>
-            <MaterialCommunityIcons
-              name="bookmark-outline"
-              color={colors.text}
-              size={34}
-            />
+            <Feather name="arrow-up-right" color={colors.text} size={40} />
           </BorderlessButton>
         </View>
       </View>
@@ -68,11 +76,10 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: "100%",
     height: height * 0.6,
-    backgroundColor: "red",
   },
   content: {
     flex: 1,
-    paddingHorizontal: 10,
+    padding: 10,
   },
   footer: {
     width: "100%",
@@ -83,6 +90,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
+    marginBottom: 5,
+    fontWeight: "bold",
   },
   icon: {
     width: 35,
