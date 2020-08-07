@@ -24,14 +24,14 @@ const Card = ({ navigation, item }: Props) => {
       onPress={openNews}
       style={{ ...styles.container, backgroundColor: colors.deep }}
     >
+      <View style={styles.content}>
+        <Text text={title} />
+      </View>
       <Image
         source={{ uri: urlToImage }}
         style={styles.image}
         resizeMode="cover"
       />
-      <View style={styles.content}>
-        <Text text={title} />
-      </View>
     </RectButton>
   );
 };
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
   image: {
     width: "45%",
     height: "100%",
-    borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
   },
   content: {
     width: "55%",

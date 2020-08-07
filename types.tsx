@@ -36,6 +36,7 @@ export type TabParamList = {
 export type HomeStackParamList = {
   Home: undefined;
   News: undefined;
+  Search: undefined;
 };
 
 export type NewsStackParamList = {

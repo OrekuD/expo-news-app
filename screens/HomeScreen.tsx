@@ -9,7 +9,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 import { useAppContext } from "../context/Context";
-import { Text, Card } from "../components";
+import { Text, Card, Header } from "../components";
 import { key } from "../apikey";
 import { NewsObj, TabParamList, HomeStackParamList } from "../types";
 import { CompositeNavigationProp } from "@react-navigation/native";
@@ -44,6 +44,7 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
 
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
+      <Header navigation={navigation} />
       <FlatList
         data={news}
         keyExtractor={() => Math.random().toString()}
@@ -64,7 +65,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    // alignItems: "center",
     paddingHorizontal: 10,
     paddingTop: 40,
   },
