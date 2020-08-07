@@ -28,8 +28,7 @@ export default Categories;
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
-    // backgroundColor: "purple",
+    height: 100,
     justifyContent: "center",
     marginVertical: 10,
   },
