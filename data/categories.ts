@@ -1,8 +1,8 @@
 export const categories = [
-  { name: "Business" },
+  { name: "Sports" },
   { name: "Entertainment" },
   { name: "Technology" },
-  { name: "Health" },
   { name: "Science" },
-  { name: "Sports" },
+  { name: "Health" },
+  { name: "Business" },
 ];

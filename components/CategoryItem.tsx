@@ -46,7 +46,7 @@ export default CategoryItem;
 
 const styles = StyleSheet.create({
   container: {
-    width: 100,
+    width: 90,
     height: 100,
     alignItems: "center",
     justifyContent: "space-evenly",

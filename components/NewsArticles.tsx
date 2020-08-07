@@ -1,15 +1,16 @@
 import * as React from "react";
 import {
-  Text,
   View,
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { NewsObj } from "../types";
 import Card from "./Card";
 import { RectButton } from "react-native-gesture-handler";
 import { useAppContext } from "../context/Context";
+import Text from "./Text";
 
 interface NewsArticlesProps {
   news: Array<NewsObj>;
@@ -17,7 +18,13 @@ interface NewsArticlesProps {
 }
 
 const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
-  const { colors } = useAppContext();
+  const { colors, setActiveNews } = useAppContext();
+  const openNews = () => {
+    const item = news[0];
+    setActiveNews(item);
+    navigation.navigate("News", { item });
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <FlatList
@@ -32,8 +39,19 @@ const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
           </View>
         )}
         ListHeaderComponent={() => {
-          const { title, urlToImage } = news[0];
-          return <RectButton style={styles.header}></RectButton>;
+          const { title, urlToImage, source } = news[0];
+          return (
+            <RectButton style={styles.header} onPress={openNews}>
+              <Image
+                source={{ uri: urlToImage }}
+                style={{ flex: 1, borderRadius: 5 }}
+                resizeMode="cover"
+              />
+              <View style={styles.source}>
+                <Text text={source.name} style={styles.text} />
+              </View>
+            </RectButton>
+          );
         }}
       />
     </View>
@@ -45,9 +63,24 @@ export default NewsArticles;
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    height: 150,
-    backgroundColor: "aqua",
+    height: 220,
     borderRadius: 5,
     marginBottom: 20,
+    position: "relative",
+  },
+  source: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 2,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
