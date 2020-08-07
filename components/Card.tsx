@@ -11,11 +11,17 @@ interface Props {
 }
 
 const Card = ({ navigation, item }: Props) => {
-  const { colors } = useAppContext();
-  const { urlToImage, title, description } = item;
+  const { colors, setActiveNews } = useAppContext();
+  const { urlToImage, title, description, url } = item;
+
+  const openNews = () => {
+    setActiveNews(item);
+    navigation.navigate("News", { item });
+  };
+
   return (
     <RectButton
-      onPress={() => navigation.navigate("News", { item })}
+      onPress={openNews}
       style={{ ...styles.container, backgroundColor: colors.deep }}
     >
       <Image

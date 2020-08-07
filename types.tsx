@@ -4,6 +4,8 @@ export interface AppContext {
   colors: Colors;
   toggleTabbar: (state: boolean) => void;
   showTabBar: boolean;
+  activeNews: NewsObj | null;
+  setActiveNews: (news: NewsObj) => void;
 }
 
 export interface Colors {
@@ -25,3 +27,18 @@ export interface NewsObj {
   url: string;
   urlToImage: string;
 }
+
+export type TabParamList = {
+  Home: undefined;
+  Settings: undefined;
+};
+
+export type HomeStackParamList = {
+  Home: undefined;
+  News: undefined;
+};
+
+export type NewsStackParamList = {
+  News: undefined;
+  NewsWeb: undefined;
+};

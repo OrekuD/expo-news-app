@@ -15,9 +15,31 @@ import {
 import { HomeScreen, NewsScreen, SettingsScreen, NewsWeb } from "../screens";
 import { StatusBar } from "react-native";
 import { useAppContext } from "../context/Context";
+import { HomeStackParamList, TabParamList, NewsStackParamList } from "../types";
 
-const HomeStack = createStackNavigator();
-const BottomTab = createBottomTabNavigator();
+const HomeStack = createStackNavigator<HomeStackParamList>();
+const NewsStack = createStackNavigator<NewsStackParamList>();
+const BottomTab = createBottomTabNavigator<TabParamList>();
+
+const NewsStackNavigator = () => {
+  return (
+    <NewsStack.Navigator
+      headerMode="none"
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
+      <NewsStack.Screen name="News" component={NewsScreen} />
+      <NewsStack.Screen
+        name="NewsWeb"
+        component={NewsWeb}
+        options={{
+          ...TransitionPresets.ModalPresentationIOS,
+        }}
+      />
+    </NewsStack.Navigator>
+  );
+};
 
 const HomeStackNavigator = () => {
   return (
@@ -28,14 +50,7 @@ const HomeStackNavigator = () => {
       }}
     >
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="News" component={NewsScreen} />
-      <HomeStack.Screen
-        name="NewsWeb"
-        component={NewsWeb}
-        options={{
-          ...TransitionPresets.ModalPresentationIOS,
-        }}
-      />
+      <HomeStack.Screen name="News" component={NewsStackNavigator} />
     </HomeStack.Navigator>
   );
 };

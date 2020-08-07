@@ -14,13 +14,18 @@ import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { StackScreenProps } from "@react-navigation/stack";
 import * as WebBrowser from "expo-web-browser";
-import * as Linking from "expo-linking";
 
 const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
-  const { colors, toggleTabbar } = useAppContext();
+  const { colors, toggleTabbar, activeNews } = useAppContext();
   const [result, setResult] = useState<any>(null);
-  const { item } = route.params;
-  const { urlToImage, publishedAt, description, source, title, url } = item;
+  const {
+    urlToImage,
+    publishedAt,
+    description,
+    source,
+    title,
+    url,
+  } = activeNews;
 
   useEffect(() => {
     toggleTabbar(false);
@@ -31,11 +36,9 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
   }, []);
 
   const openLink = async () => {
-    // let result = await WebBrowser.openBrowserAsync(url);
-    // setResult(result);
-    // console.log(result);
-
-    Linking.openURL(url);
+    let result = await WebBrowser.openBrowserAsync(url);
+    setResult(result);
+    console.log(result);
   };
 
   return (

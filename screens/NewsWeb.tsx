@@ -2,9 +2,11 @@ import * as React from "react";
 import { Text, View, StyleSheet, Platform, StatusBar } from "react-native";
 import { WebView } from "react-native-webview";
 import { StackScreenProps } from "@react-navigation/stack";
+import { useAppContext } from "../context/Context";
 
 const NewsWeb: React.FC<StackScreenProps<{}>> = ({ navigation, route }) => {
-  const { url } = route.params;
+  const { activeNews } = useAppContext();
+  // const { url } = route.params;
 
   const runFirst = `
       window.isNativeApp = true;
@@ -14,7 +16,7 @@ const NewsWeb: React.FC<StackScreenProps<{}>> = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <WebView
-        source={{ uri: url }}
+        source={{ uri: activeNews?.url }}
         injectedJavaScriptBeforeContentLoaded={runFirst}
       />
     </View>

@@ -7,24 +7,22 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 import { useAppContext } from "../context/Context";
 import { Text, Card } from "../components";
 import { key } from "../apikey";
-import { NewsObj } from "../types";
+import { NewsObj, TabParamList, HomeStackParamList } from "../types";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
-const test = [
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-  { id: Math.random().toString() },
-];
+interface HomeScreenNavigationProp {
+  navigation: CompositeNavigationProp<
+    BottomTabNavigationProp<TabParamList, "Home">,
+    StackNavigationProp<HomeStackParamList, "News">
+  >;
+}
 
-const HomeScreen: React.FC<StackScreenProps<{}>> = ({ navigation }) => {
+const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
   const { colors } = useAppContext();
   const [news, setNews] = useState<Array<NewsObj>>([]);
 
