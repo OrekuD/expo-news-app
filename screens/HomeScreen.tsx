@@ -11,7 +11,7 @@ import { useAppContext } from "../context/Context";
 import { Header, Categories, NewsArticles } from "../components";
 import { key } from "../apikey";
 import { NewsObj, TabParamList, HomeStackParamList } from "../types";
-import { CompositeNavigationProp } from "@react-navigation/native";
+import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 interface HomeScreenNavigationProp {
@@ -19,21 +19,36 @@ interface HomeScreenNavigationProp {
     BottomTabNavigationProp<TabParamList, "Home">,
     StackNavigationProp<HomeStackParamList, "News">
   >;
+  route: RouteProp<TabParamList, "Home">;
 }
 
 const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
   const { colors } = useAppContext();
   const [news, setNews] = useState<Array<NewsObj>>([]);
+  const [category, setCategory] = useState<string>("");
 
   useEffect(() => {
     fetchLatestNews();
-  }, []);
+  }, [category]);
+
+  const setActiveCategory = (name: string) => {
+    setCategory(name);
+  };
 
   const fetchLatestNews = async () => {
+    setNews([]);
     try {
-      const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`
-      );
+      let response;
+      if (!category || category === "all") {
+        response = await fetch(
+          `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`
+        );
+      } else {
+        response = await fetch(
+          `https://newsapi.org/v2/everything?q=${category}&apiKey=${key}`
+        );
+      }
+
       const data = await response.json();
       setNews(data.articles);
     } catch (error) {
@@ -47,7 +62,9 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
         keyExtractor={() => Math.random().toString()}
         data={[""]}
         ListHeaderComponent={() => <Header navigation={navigation} />}
-        renderItem={({ item }) => <Categories />}
+        renderItem={({ item }) => (
+          <Categories setActiveCategory={setActiveCategory} />
+        )}
         ListFooterComponent={() => (
           <NewsArticles news={news} navigation={navigation} />
         )}

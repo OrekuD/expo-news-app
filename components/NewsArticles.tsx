@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -19,11 +19,16 @@ interface NewsArticlesProps {
 
 const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
   const { colors, setActiveNews } = useAppContext();
+  const [firstArticle, setFirstArticle] = useState<NewsObj>();
   const openNews = () => {
     const item = news[0];
     setActiveNews(item);
     navigation.navigate("News", { item });
   };
+
+  useEffect(() => {
+    setFirstArticle(news[0]);
+  }, [news]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -39,19 +44,23 @@ const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
           </View>
         )}
         ListHeaderComponent={() => {
-          const { title, urlToImage, source } = news[0];
-          return (
-            <RectButton style={styles.header} onPress={openNews}>
-              <Image
-                source={{ uri: urlToImage }}
-                style={{ flex: 1, borderRadius: 5 }}
-                resizeMode="cover"
-              />
-              <View style={styles.source}>
-                <Text text={source.name} style={styles.text} />
-              </View>
-            </RectButton>
-          );
+          if (firstArticle) {
+            const { title, urlToImage, source } = firstArticle;
+            return (
+              <RectButton style={styles.header} onPress={openNews}>
+                <Image
+                  source={{ uri: urlToImage }}
+                  style={{ flex: 1, borderRadius: 5 }}
+                  resizeMode="cover"
+                />
+                <View style={styles.source}>
+                  <Text text={source.name} style={styles.text} />
+                </View>
+              </RectButton>
+            );
+          } else {
+            return <View />;
+          }
         }}
       />
     </View>

@@ -6,13 +6,21 @@ import Text from "./Text";
 interface CategoryItemProps {
   item: { name: string };
   header?: boolean;
+  setActiveCategory: (name: string) => void;
 }
 
-const CategoryItem = ({ item: { name }, header }: CategoryItemProps) => {
+const CategoryItem = ({
+  item: { name },
+  header,
+  setActiveCategory,
+}: CategoryItemProps) => {
   if (header) {
     return (
       <View style={styles.container}>
-        <RectButton style={{ ...styles.header }}>
+        <RectButton
+          style={{ ...styles.header }}
+          onPress={() => setActiveCategory(name.toLowerCase())}
+        >
           <View style={styles.row}>
             <View style={styles.dot} />
             <View style={styles.dot} />
@@ -36,7 +44,10 @@ const CategoryItem = ({ item: { name }, header }: CategoryItemProps) => {
 
   return (
     <View style={styles.container}>
-      <RectButton style={styles.item}></RectButton>
+      <RectButton
+        style={styles.item}
+        onPress={() => setActiveCategory(name.toLowerCase())}
+      ></RectButton>
       <Text text={name} style={styles.text} />
     </View>
   );

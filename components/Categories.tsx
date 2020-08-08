@@ -4,20 +4,28 @@ import { RectButton } from "react-native-gesture-handler";
 import { categories } from "../data/categories";
 import CategoryItem from "./CategoryItem";
 
-interface CategoriesProps {}
+interface CategoriesProps {
+  setActiveCategory: (name: string) => void;
+}
 
-const Categories = (props: CategoriesProps) => {
+const Categories = ({ setActiveCategory }: CategoriesProps) => {
   return (
     <View style={styles.container}>
       <FlatList
         data={categories}
-        renderItem={({ item }) => <CategoryItem item={item} />}
+        renderItem={({ item }) => (
+          <CategoryItem setActiveCategory={setActiveCategory} item={item} />
+        )}
         horizontal
         keyExtractor={({ name }) => name}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ alignItems: "center" }}
         ListHeaderComponent={() => (
-          <CategoryItem header item={{ name: "All" }} />
+          <CategoryItem
+            setActiveCategory={setActiveCategory}
+            header
+            item={{ name: "All" }}
+          />
         )}
       />
     </View>
