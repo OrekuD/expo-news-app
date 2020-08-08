@@ -41,6 +41,11 @@ export type HomeStackParamList = {
   Search: undefined;
 };
 
+export type SearchStackParamList = {
+  Search: undefined;
+  News: undefined;
+};
+
 export type NewsStackParamList = {
   News: undefined;
   NewsWeb: undefined;

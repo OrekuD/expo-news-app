@@ -21,9 +21,15 @@ import {
 } from "../screens";
 import { StatusBar } from "react-native";
 import { useAppContext } from "../context/Context";
-import { HomeStackParamList, TabParamList, NewsStackParamList } from "../types";
+import {
+  HomeStackParamList,
+  TabParamList,
+  NewsStackParamList,
+  SearchStackParamList,
+} from "../types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
+const SearchStack = createStackNavigator<SearchStackParamList>();
 const NewsStack = createStackNavigator<NewsStackParamList>();
 const BottomTab = createBottomTabNavigator<TabParamList>();
 
@@ -56,9 +62,23 @@ const HomeStackNavigator = () => {
       }}
     >
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Search" component={SearchScreen} />
+      <HomeStack.Screen name="Search" component={SearchStackNavigator} />
       <HomeStack.Screen name="News" component={NewsStackNavigator} />
     </HomeStack.Navigator>
+  );
+};
+
+const SearchStackNavigator = () => {
+  return (
+    <SearchStack.Navigator
+      headerMode="none"
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
+      <SearchStack.Screen name="Search" component={SearchScreen} />
+      <SearchStack.Screen name="News" component={NewsStackNavigator} />
+    </SearchStack.Navigator>
   );
 };
 
