@@ -20,6 +20,7 @@ const Context = createContext<AppContext>({
   toggleTabbar: () => {},
   activeNews: null,
   setActiveNews: () => {},
+  isSavedArticle: () => false,
 });
 
 const Provider = ({ children }: ProviderProps) => {
@@ -43,6 +44,9 @@ const Provider = ({ children }: ProviderProps) => {
   };
 
   const removeArticle = async (removeArticle: NewsObj) => {
+    if (!isSavedArticle(removeArticle)) {
+      return;
+    }
     let tempArticles = [...savedArticles];
     await setItem(
       JSON.stringify(
@@ -55,8 +59,23 @@ const Provider = ({ children }: ProviderProps) => {
   };
 
   const addArticle = async (article: NewsObj) => {
-    setSavedArticles([...savedArticles, article]);
-    await setItem(JSON.stringify(savedArticles));
+    if (isSavedArticle(article)) {
+      return;
+    }
+    let tempArticles = [...savedArticles, article];
+    setSavedArticles(tempArticles);
+    await setItem(JSON.stringify(tempArticles));
+  };
+
+  const isSavedArticle = (article: NewsObj) => {
+    let tempArticles = [...savedArticles];
+    let result = tempArticles.find(
+      (_article) => _article.title === article.title
+    );
+    if (result) {
+      return true;
+    }
+    return false;
   };
 
   useEffect(() => {
@@ -100,6 +119,7 @@ const Provider = ({ children }: ProviderProps) => {
     addArticle,
     removeArticle,
     savedArticles,
+    isSavedArticle,
   };
   return <Context.Provider value={state}>{children}</Context.Provider>;
 };

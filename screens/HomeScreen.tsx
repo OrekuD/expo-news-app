@@ -61,7 +61,9 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
       <FlatList
         keyExtractor={() => Math.random().toString()}
         data={[""]}
-        ListHeaderComponent={() => <Header navigation={navigation} />}
+        ListHeaderComponent={() => (
+          <Header title="News" navigation={navigation} />
+        )}
         renderItem={({ item }) => (
           <Categories setActiveCategory={setActiveCategory} />
         )}

@@ -21,6 +21,9 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
     toggleTabbar,
     activeNews,
     linksInExternalBrowser,
+    addArticle,
+    isSavedArticle,
+    removeArticle,
   } = useAppContext();
   const [result, setResult] = useState<any>(null);
   const {
@@ -41,9 +44,13 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
   }, []);
 
   const openLink = async () => {
-    let result = await WebBrowser.openBrowserAsync(url);
-    setResult(result);
-    console.log(result);
+    await WebBrowser.openBrowserAsync(url);
+  };
+
+  const manageFavourites = () => {
+    isSavedArticle(activeNews)
+      ? removeArticle(activeNews)
+      : addArticle(activeNews);
   };
 
   return (
@@ -57,6 +64,7 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
           style={styles.imageContainer}
           resizeMode="cover"
         />
+
         <View style={styles.content}>
           <Text
             text={new Date(publishedAt).toDateString()}
@@ -72,12 +80,23 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
           <Text text={source.name} />
         </View>
         <View style={styles.row}>
-          <BorderlessButton style={{ marginRight: 20 }}>
-            <MaterialCommunityIcons
-              name="bookmark-outline"
-              color={colors.text}
-              size={32}
-            />
+          <BorderlessButton
+            onPress={manageFavourites}
+            style={{ marginRight: 20 }}
+          >
+            {isSavedArticle(activeNews) ? (
+              <MaterialCommunityIcons
+                name="bookmark"
+                color={colors.text}
+                size={32}
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="bookmark-outline"
+                color={colors.text}
+                size={32}
+              />
+            )}
           </BorderlessButton>
           <BorderlessButton
             onPress={() => {
@@ -115,8 +134,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    marginBottom: 5,
-    fontWeight: "bold",
+    fontFamily: "HeeboM",
+    lineHeight: 50,
   },
   icon: {
     width: 35,
@@ -132,6 +151,7 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
     color: "grey",
+    marginBottom: 10,
   },
   row: {
     flexDirection: "row",

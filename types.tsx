@@ -2,6 +2,7 @@ export interface AppContext {
   darkTheme: boolean;
   savedArticles: Array<NewsObj>;
   addArticle: (article: NewsObj) => void;
+  isSavedArticle: (article: NewsObj) => boolean;
   removeArticle: (article: NewsObj) => void;
   toggleTheme: () => void;
   linksInExternalBrowser: boolean;

@@ -8,6 +8,10 @@ import { AppLoading } from "expo";
 const App = () => {
   let [fontsLoaded] = useFonts({
     Heebo: require("./assets/fonts/Heebo-VariableFont_wght.ttf"),
+    HeeboR: require("./assets/fonts/Heebo-Regular.ttf"),
+    HeeboB: require("./assets/fonts/Heebo-Bold.ttf"),
+    HeeboM: require("./assets/fonts/Heebo-Medium.ttf"),
+    HeeboT: require("./assets/fonts/Heebo-Thin.ttf"),
   });
 
   if (!fontsLoaded) {
