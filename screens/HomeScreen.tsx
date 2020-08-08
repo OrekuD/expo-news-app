@@ -43,17 +43,14 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
         response = await fetch(
           `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`
         );
-        console.log("First");
       } else {
         response = await fetch(
           `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${key}`
         );
-        console.log("Second");
       }
 
       const data = await response.json();
       setNews(data.articles);
-      console.log("Third");
     } catch (error) {
       Alert.alert("", "Try again later");
     }

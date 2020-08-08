@@ -3,7 +3,12 @@ import { Text, View, StyleSheet, FlatList } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 // import { categories } from "../data/categories";
 import CategoryItem from "./CategoryItem";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  Feather,
+  MaterialIcons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 interface CategoriesProps {
   setActiveCategory: (name: string) => void;
@@ -17,23 +22,23 @@ const Categories = ({ setActiveCategory }: CategoriesProps) => {
     },
     {
       name: "Entertainment",
-      icon: <Ionicons name="ios-basketball" size={30} color="#fff" />,
+      icon: <Ionicons name="ios-musical-notes" size={30} color="#fff" />,
     },
     {
       name: "Technology",
-      icon: <Ionicons name="ios-basketball" size={30} color="#fff" />,
+      icon: <Feather name="smartphone" size={30} color="#fff" />,
     },
     {
       name: "Science",
-      icon: <Ionicons name="ios-basketball" size={30} color="#fff" />,
+      icon: <AntDesign name="team" size={30} color="#fff" />,
     },
     {
       name: "Health",
-      icon: <Ionicons name="ios-basketball" size={30} color="#fff" />,
+      icon: <MaterialIcons name="healing" size={30} color="#fff" />,
     },
     {
       name: "Business",
-      icon: <Ionicons name="ios-basketball" size={30} color="#fff" />,
+      icon: <MaterialIcons name="business-center" size={30} color="#fff" />,
     },
   ];
 

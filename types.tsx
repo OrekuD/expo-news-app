@@ -1,5 +1,8 @@
 export interface AppContext {
   darkTheme: boolean;
+  savedArticles: Array<NewsObj>;
+  addArticle: (article: NewsObj) => void;
+  removeArticle: (article: NewsObj) => void;
   toggleTheme: () => void;
   linksInExternalBrowser: boolean;
   toggleLinks: () => void;
@@ -33,6 +36,7 @@ export interface NewsObj {
 export type TabParamList = {
   Home: undefined;
   Settings: undefined;
+  Favourites: undefined;
 };
 
 export type HomeStackParamList = {
@@ -43,6 +47,11 @@ export type HomeStackParamList = {
 
 export type SearchStackParamList = {
   Search: undefined;
+  News: undefined;
+};
+
+export type FavouritesStackParamList = {
+  Favourites: undefined;
   News: undefined;
 };
 

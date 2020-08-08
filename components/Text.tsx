@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Text as RNText, View, StyleSheet, TextStyle } from "react-native";
+import {
+  Text as RNText,
+  View,
+  StyleSheet,
+  TextStyle,
+  TextProps,
+} from "react-native";
 import { useAppContext } from "../context/Context";
 
 interface Props {

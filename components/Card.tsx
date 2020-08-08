@@ -1,7 +1,6 @@
 import * as React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 import { useAppContext } from "../context/Context";
-import Text from "./Text";
 import { RectButton } from "react-native-gesture-handler";
 import { NewsObj } from "../types";
 
@@ -25,7 +24,10 @@ const Card = ({ navigation, item }: Props) => {
       style={{ ...styles.container, backgroundColor: colors.deep }}
     >
       <View style={styles.content}>
-        <Text text={title} />
+        <Text style={{ color: colors.text }} numberOfLines={2}>
+          {" "}
+          {title}{" "}
+        </Text>
       </View>
       <Image
         source={{ uri: urlToImage }}

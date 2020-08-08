@@ -18,6 +18,7 @@ import {
   SettingsScreen,
   NewsWeb,
   SearchScreen,
+  FavouriteArticlesScreen,
 } from "../screens";
 import { StatusBar } from "react-native";
 import { useAppContext } from "../context/Context";
@@ -26,10 +27,12 @@ import {
   TabParamList,
   NewsStackParamList,
   SearchStackParamList,
+  FavouritesStackParamList,
 } from "../types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 const SearchStack = createStackNavigator<SearchStackParamList>();
+const FavouritesStack = createStackNavigator<FavouritesStackParamList>();
 const NewsStack = createStackNavigator<NewsStackParamList>();
 const BottomTab = createBottomTabNavigator<TabParamList>();
 
@@ -82,6 +85,23 @@ const SearchStackNavigator = () => {
   );
 };
 
+const FavouritesStackNavigator = () => {
+  return (
+    <FavouritesStack.Navigator
+      headerMode="none"
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
+      <FavouritesStack.Screen
+        name="Favourites"
+        component={FavouriteArticlesScreen}
+      />
+      <FavouritesStack.Screen name="News" component={NewsStackNavigator} />
+    </FavouritesStack.Navigator>
+  );
+};
+
 const BottomTabNavigator = () => {
   const { colors, showTabBar } = useAppContext();
   return (
@@ -103,6 +123,19 @@ const BottomTabNavigator = () => {
               name="fire"
               color={focused ? colors.text : "grey"}
               size={26}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Favourites"
+        component={FavouritesStackNavigator}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialCommunityIcons
+              name="bookmark"
+              color={focused ? colors.text : "grey"}
+              size={32}
             />
           ),
         }}
