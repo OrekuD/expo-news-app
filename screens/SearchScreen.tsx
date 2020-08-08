@@ -40,7 +40,7 @@ const SearchScreen: React.FC<StackScreenProps<{}>> = ({ navigation }) => {
     }
     try {
       const response = await fetch(
-        `request https://newsapi.org/v2/everything?q=bitcoin&apiKey=${key}`,
+        `https://newsapi.org/v2/everything?q=${searchTerm.toLocaleLowerCase()}&apiKey=${key}`,
         {
           headers: {
             "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -111,11 +111,7 @@ const SearchScreen: React.FC<StackScreenProps<{}>> = ({ navigation }) => {
                 renderItem={({ item }) => (
                   <Card item={item} navigation={navigation} />
                 )}
-                numColumns={2}
-                columnWrapperStyle={{
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                }}
+                keyExtractor={({ title }) => title}
                 showsVerticalScrollIndicator={false}
                 ListFooterComponent={() => <View style={{ height: 120 }} />}
               />
@@ -131,6 +127,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 30,
+    paddingHorizontal: 10,
   },
   textInput: {
     width: width * 0.95,
