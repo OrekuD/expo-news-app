@@ -12,7 +12,7 @@ const FavouriteArticles: React.FC<BottomTabScreenProps<{}>> = ({
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <FlatList
         data={savedArticles}
-        ListHeaderComponent={() => <Header noIcon title="Saved Article" />}
+        ListHeaderComponent={() => <Header noIcon title="Saved Articles" />}
         contentContainerStyle={{ flex: 1 }}
         renderItem={({ item }) => <Card item={item} navigation={navigation} />}
         keyExtractor={() => Math.random().toString()}

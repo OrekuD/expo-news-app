@@ -9,14 +9,18 @@ import {
 import { useAppContext } from "../context/Context";
 
 interface Props {
-  text: string;
+  text: string | number;
   style?: TextStyle;
+  numberOfLines?: number;
 }
 
-const Text = ({ text, style }: Props) => {
+const Text = ({ text, style, numberOfLines }: Props) => {
   const { colors } = useAppContext();
   return (
-    <RNText style={{ ...styles.text, color: colors.text, ...style }}>
+    <RNText
+      numberOfLines={numberOfLines}
+      style={{ ...styles.text, color: colors.text, ...style }}
+    >
       {text}
     </RNText>
   );

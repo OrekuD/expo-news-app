@@ -70,7 +70,7 @@ const NewsScreen = ({ navigation, route }: StackScreenProps<{}>) => {
             text={new Date(publishedAt).toDateString()}
             style={styles.dateText}
           />
-          <Text text={title} style={styles.title} />
+          <Text text={title} style={styles.title} numberOfLines={4} />
           <Text text={description} style={{ fontSize: 18 }} />
         </View>
       </ScrollView>

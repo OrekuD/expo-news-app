@@ -1,8 +1,9 @@
 import * as React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { useAppContext } from "../context/Context";
 import { RectButton } from "react-native-gesture-handler";
 import { NewsObj } from "../types";
+import Text from "./Text";
 
 interface Props {
   navigation: any;
@@ -11,7 +12,7 @@ interface Props {
 
 const Card = ({ navigation, item }: Props) => {
   const { colors, setActiveNews } = useAppContext();
-  const { urlToImage, title, description, url } = item;
+  const { urlToImage, title, description, url, publishedAt } = item;
 
   const openNews = () => {
     setActiveNews(item);
@@ -24,10 +25,11 @@ const Card = ({ navigation, item }: Props) => {
       style={{ ...styles.container, backgroundColor: colors.deep }}
     >
       <View style={styles.content}>
-        <Text style={{ color: colors.text }} numberOfLines={2}>
-          {" "}
-          {title}{" "}
-        </Text>
+        <Text text={title} style={styles.cardText} numberOfLines={3} />
+        <Text
+          text={new Date(publishedAt).toDateString()}
+          style={styles.publishedText}
+        />
       </View>
       <Image
         source={{ uri: urlToImage }}
@@ -57,6 +59,16 @@ const styles = StyleSheet.create({
     width: "55%",
     height: "100%",
     padding: 5,
+    justifyContent: "space-between",
+  },
+  cardText: {
+    fontSize: 18,
+    fontFamily: "HeeboM",
+  },
+  publishedText: {
+    fontSize: 14,
+    fontFamily: "HeeboM",
+    color: "grey",
   },
 });
 

@@ -35,6 +35,7 @@ const SearchStack = createStackNavigator<SearchStackParamList>();
 const FavouritesStack = createStackNavigator<FavouritesStackParamList>();
 const NewsStack = createStackNavigator<NewsStackParamList>();
 const BottomTab = createBottomTabNavigator<TabParamList>();
+const SettingsNavigator = createStackNavigator();
 
 const NewsStackNavigator = () => {
   return (
@@ -82,6 +83,19 @@ const SearchStackNavigator = () => {
       <SearchStack.Screen name="Search" component={SearchScreen} />
       <SearchStack.Screen name="News" component={NewsStackNavigator} />
     </SearchStack.Navigator>
+  );
+};
+
+const SettingsStackNavigator = () => {
+  return (
+    <SettingsNavigator.Navigator
+      headerMode="none"
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
+      <SettingsNavigator.Screen name="Search" component={SettingsScreen} />
+    </SettingsNavigator.Navigator>
   );
 };
 
@@ -142,7 +156,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsStackNavigator}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons

@@ -3,7 +3,8 @@ import { View, StyleSheet, Switch } from "react-native";
 import { useAppContext } from "../context/Context";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { width } from "../constants/Layout";
-import { Text } from "../components";
+import { Text, Header } from "../components";
+import { RectButton } from "react-native-gesture-handler";
 
 const SettingsScreen = ({ navigation }: BottomTabScreenProps<{}>) => {
   const {
@@ -15,6 +16,7 @@ const SettingsScreen = ({ navigation }: BottomTabScreenProps<{}>) => {
   } = useAppContext();
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
+      <Header title="Settings" noIcon />
       <View style={styles.content}>
         <View style={{ ...styles.card, backgroundColor: colors.deep }}>
           <Text text="Dark theme" style={styles.cardText} />
@@ -24,6 +26,12 @@ const SettingsScreen = ({ navigation }: BottomTabScreenProps<{}>) => {
           <Text text="Open links in an external browser" />
           <Switch value={linksInExternalBrowser} onValueChange={toggleLinks} />
         </View>
+        <RectButton
+          onPress={() => navigation.navigate("Animations")}
+          style={{ ...styles.card, backgroundColor: colors.deep }}
+        >
+          <Text text="Animations" />
+        </RectButton>
       </View>
     </View>
   );
@@ -35,11 +43,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingTop: 100,
+    paddingTop: 40,
+    paddingHorizontal: 10,
   },
   content: {
-    flex: 1,
-    paddingTop: 20,
+    // flex: 1,
+    // paddingTop: 20,
   },
   card: {
     width: width * 0.95,
