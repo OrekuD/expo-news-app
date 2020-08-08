@@ -4,13 +4,13 @@ import { RectButton } from "react-native-gesture-handler";
 import Text from "./Text";
 
 interface CategoryItemProps {
-  item: { name: string };
+  item: { name: string; icon?: React.ReactNode };
   header?: boolean;
   setActiveCategory: (name: string) => void;
 }
 
 const CategoryItem = ({
-  item: { name },
+  item: { name, icon },
   header,
   setActiveCategory,
 }: CategoryItemProps) => {
@@ -47,7 +47,9 @@ const CategoryItem = ({
       <RectButton
         style={styles.item}
         onPress={() => setActiveCategory(name.toLowerCase())}
-      ></RectButton>
+      >
+        {icon}
+      </RectButton>
       <Text text={name} style={styles.text} />
     </View>
   );
@@ -67,6 +69,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     backgroundColor: "pink",
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
     fontSize: 14,
