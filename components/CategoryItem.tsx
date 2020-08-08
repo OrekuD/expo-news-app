@@ -19,7 +19,7 @@ const CategoryItem = ({
       <View style={styles.container}>
         <RectButton
           style={{ ...styles.header }}
-          onPress={() => setActiveCategory(name.toLowerCase())}
+          onPress={() => setActiveCategory("general")}
         >
           <View style={styles.row}>
             <View style={styles.dot} />
