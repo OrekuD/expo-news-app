@@ -6,6 +6,10 @@ An application built with Expo, that uses the [News Api](https://newsapi.org/).
 
 ![Screenshot 1](https://github.com/OrekuD/expo-news-app/blob/master/assets/screenshots/light-1.jpg?raw=true)
 ![Screenshot 2](https://github.com/OrekuD/expo-news-app/blob/master/assets/screenshots/light-2.jpg?raw=true)
+
+#### Save your favourite articles
+
+Save articles and read them offline later
 ![Screenshot 3](https://github.com/OrekuD/expo-news-app/blob/master/assets/screenshots/light-3.jpg?raw=true)
 
 #### Dark Mode
