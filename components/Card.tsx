@@ -31,11 +31,23 @@ const Card = ({ navigation, item }: Props) => {
           style={styles.publishedText}
         />
       </View>
-      <Image
-        source={{ uri: urlToImage }}
-        style={styles.image}
-        resizeMode="cover"
-      />
+      {urlToImage ? (
+        <Image
+          source={{ uri: urlToImage }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+      ) : (
+        <View
+          style={{
+            ...styles.image,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text text="No image" style={styles.cardText} numberOfLines={3} />
+        </View>
+      )}
     </RectButton>
   );
 };

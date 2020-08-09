@@ -68,7 +68,11 @@ const HomeScreen = ({ navigation }: HomeScreenNavigationProp) => {
           <Categories setActiveCategory={setActiveCategory} />
         )}
         ListFooterComponent={() => (
-          <NewsArticles news={news} navigation={navigation} />
+          <NewsArticles
+            category={category}
+            news={news}
+            navigation={navigation}
+          />
         )}
       />
     </View>

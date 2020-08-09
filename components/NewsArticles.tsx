@@ -15,9 +15,10 @@ import Text from "./Text";
 interface NewsArticlesProps {
   news: Array<NewsObj>;
   navigation: any;
+  category: string;
 }
 
-const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
+const NewsArticles = ({ news, navigation, category }: NewsArticlesProps) => {
   const { colors, setActiveNews } = useAppContext();
   const [firstArticle, setFirstArticle] = useState<NewsObj>();
   const openNews = () => {
@@ -32,6 +33,11 @@ const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
 
   return (
     <View style={{ flex: 1 }}>
+      {category === "" || category === "general" ? (
+        <Text text={`Latest news`} style={styles.title} />
+      ) : (
+        <Text text={`Latest ${category} news`} style={styles.title} />
+      )}
       <FlatList
         data={news.slice(1, news.length - 1)}
         renderItem={({ item }) => <Card item={item} navigation={navigation} />}
@@ -46,6 +52,9 @@ const NewsArticles = ({ news, navigation }: NewsArticlesProps) => {
         ListHeaderComponent={() => {
           if (firstArticle) {
             const { title, urlToImage, source } = firstArticle;
+            if (!urlToImage) {
+              setFirstArticle(news[1]);
+            }
             return (
               <RectButton style={styles.header} onPress={openNews}>
                 <Image
@@ -92,5 +101,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#121212",
+  },
+  title: {
+    fontSize: 30,
+    fontFamily: "HeeboM",
+    margin: 10,
   },
 });

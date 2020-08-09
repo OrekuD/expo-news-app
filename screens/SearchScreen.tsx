@@ -40,7 +40,7 @@ const SearchScreen: React.FC<StackScreenProps<{}>> = ({ navigation }) => {
     }
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${searchTerm.toLocaleLowerCase()}&apiKey=${key}`,
+        `https://newsapi.org/v2/top-headlines?q=${searchTerm.toLocaleLowerCase()}&apiKey=${key}`,
         {
           headers: {
             "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 20,
     marginBottom: 10,
-    paddingLeft: width * 0.025,
   },
   loader: {
     flex: 1,
